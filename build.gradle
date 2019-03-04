@@ -13,11 +13,14 @@ repositories {
 // tag::jar[]
 jar {
     baseName = 'demo-app-artifact'
-    manifest {
-        attributes(
-                'Main-Class': 'hello.HelloWorld',
-                'Class-Path': configurations.compile.collect { it.getName() }.join(' ')
-        )
+    doFirst {
+        manifest {
+            if (!configurations.compile.isEmpty()) {
+                attributes(
+                        'Class-Path': configurations.compile.collect{it.toURI().toString()}.join(' '),
+                        'Main-Class': 'hello.HelloWorld')
+            }
+        }
     }
 }
 // end::jar[]
