@@ -15,11 +15,9 @@ jar {
     baseName = 'demo-app-artifact'
     doFirst {
         manifest {
-            if (!configurations.compile.isEmpty()) {
                 attributes(
                         'Class-Path': configurations.compile.collect{it.toURI().toString()}.join(' '),
                         'Main-Class': 'hello.HelloWorld')
-            }
         }
     }
 }
