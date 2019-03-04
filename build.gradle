@@ -15,7 +15,8 @@ jar {
     baseName = 'demo-app-artifact'
     manifest {
         attributes(
-                'Main-Class': 'hello.HelloWorld'
+                'Main-Class': 'hello.HelloWorld',
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' ')
         )
     }
 }
